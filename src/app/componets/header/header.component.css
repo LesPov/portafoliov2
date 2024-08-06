@@ -1,6 +1,6 @@
 .container {
     background: var(--color-background-container);
-    backdrop-filter: blur(1px);
+    backdrop-filter: blur(25px);
     border: 1px solid var(--border-interior);
     position: relative;
     top: -10px;
