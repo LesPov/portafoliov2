@@ -1,17 +1,15 @@
 .header {
-    width: 105%;
+    width: 100%;
     position: fixed;
     bottom: 0px;
-    left: -10px;
+    left: 0;
     z-index: 1060;
     border: 1px solid var(--border-interior);
     box-shadow: 0px 0px 6px 2px var(--border-shadow-interior);
     background: var(--color-background-header-sidenav);
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
 }
 
 
