@@ -1,8 +1,21 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
+import { provideClientHydration } from '@angular/platform-browser';
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
+
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes)]
+  providers: [
+    provideRouter(routes),
+    provideClientHydration(),
+    // provideToastr({
+    //   timeOut: 5000,
+    //   positionClass: 'toast-top-right',
+    //   preventDuplicates: true,
+    // }),
+    importProvidersFrom(BrowserAnimationsModule),
+    provideAnimations(),
+  ]
 };

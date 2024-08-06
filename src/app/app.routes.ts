@@ -3,9 +3,9 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 export const routes: Routes = [
     { path: 'sobremi', loadComponent: () => import('./componets/sobremi/sobremi.component').then(m => m.SobremiComponent) },
-    { path: '', redirectTo: '/about', pathMatch: 'full' },
-    { path: '**', redirectTo: '/about' }
-];  
+    { path: '', redirectTo: '/sobremi', pathMatch: 'full' },
+    { path: '**', redirectTo: '/sobremi' }
+];
 @NgModule({
     imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
     exports: [RouterModule]
