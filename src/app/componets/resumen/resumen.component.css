@@ -11,7 +11,7 @@
 
 
 .resumen .text-animate2 {
-    width: 11rem;
+    width: 10.5rem;
     position: relative;
 }
 
@@ -20,8 +20,7 @@
     font-weight: 800;
     color: transparent;
     text-align: center;
-    -webkit-text-stroke: 0.01vw #000;
-    background: linear-gradient(to top, #fff, #fff);
+    background: linear-gradient(to top, var(--color-white-text), var(--color-white-text));
     background-repeat: no-repeat;
     -webkit-background-clip: text;
     background-position: 0 0;
@@ -37,7 +36,7 @@
     top: 6px;
     left: 1px;
     height: 24px;
-    border-right: 3px solid var(--color-blanco-texto);
+    border-right: 3px solid var(--color-white-text);
     animation: moveCursorText1 5s linear infinite;
     animation-delay: 1s;
 }
@@ -47,7 +46,7 @@
     0%,
     10%,
     100% {
-        background-position: -11rem 0;
+        background-position: -10.5rem 0;
     }
 
     65%,
