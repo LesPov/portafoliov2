@@ -139,13 +139,18 @@
 }
 
 
-.active .sidenav_link_text {
-    color: var(--color-naranga-neon);
-    font-size: 18px;
-    font-weight: 800;
+.active .sidenav_link_text{
+    color: var(--color-white-text);
+
+    font-size: 20px;
+    font-weight: 900;
 }
 
-
+.active .nav_icon{
+    color: var(--color-naranga-neon);
+    font-size: 3rem;
+    font-weight: 700;
+}
 
 /* //////////// Dark Tema ///////////////////// */
 

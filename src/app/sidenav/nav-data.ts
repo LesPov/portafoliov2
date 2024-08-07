@@ -1,12 +1,12 @@
 export const navbarData = [
     {
-        routerLink: 'about',
+        routerLink: 'sobremi',
         icon: 'bx bx-user',
         label: 'Sobre Mi'
     },
     {
         routerLink: 'resumen',
-        icon: 'bx bx-library',
+        icon: 'bx bx-align-middle',
         label: 'Resumen'
     },
     {

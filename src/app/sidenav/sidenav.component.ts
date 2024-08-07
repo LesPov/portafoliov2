@@ -41,10 +41,7 @@ export class SidenavComponent implements OnInit {
         this.navClose.addEventListener('click', this.hideMenu.bind(this));
       }
 
-      const navLinks = document.querySelectorAll('.nav_link');
-      navLinks.forEach(link => {
-        link.addEventListener('click', this.linkAction.bind(this));
-      });
+
     }
   }
   // showsuccess(): void {
@@ -78,21 +75,7 @@ export class SidenavComponent implements OnInit {
     }
   }
 
-  linkAction(event: Event): void {
-    event.preventDefault();
-    const target = event.currentTarget as HTMLAnchorElement;
-    const sectionId = target.getAttribute('href') || '#about';
 
-    if (this.navMenu && this.navToggle) {
-      this.navMenu.classList.remove('show-menu');
-      this.navToggle.style.display = 'block';
-    }
-
-    const section = document.querySelector(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
 
   private getCurrentTheme(): string {
     return document.body.classList.contains(this.darkTheme) ? 'dark' : 'light';
