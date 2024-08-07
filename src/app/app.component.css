@@ -4,7 +4,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.50);
+    background: rgba(0, 0, 0, 0.40);
     z-index: -1;
 }
 
@@ -14,7 +14,7 @@
     height: 250px;
     width: 250px;
     border-radius: 50%;
-    background: linear-gradient(#ff0000, #a70055);
+    background: linear-gradient(#00ffc0, #ff00cf);
     transform: translate(-45px, -30px);
     z-index: -2;
 

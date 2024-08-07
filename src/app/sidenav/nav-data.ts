@@ -5,7 +5,7 @@ export const navbarData = [
         label: 'Sobre Mi'
     },
     {
-        routerLink: 'resume',
+        routerLink: 'resumen',
         icon: 'bx bx-library',
         label: 'Resumen'
     },

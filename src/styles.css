@@ -14,7 +14,7 @@ body {
 
 :root {
     /* ///header//// */
-    --color-background-container: hsl(204deg 100% 3% / 45%);
+    --color-background-container: hsla(204, 100%, 3%, 0.718);
     --color-background-header-sidenav: hsl(204deg 100% 3%);
     --color-azul-neon: hsl(186, 100%, 50%);
     --color-borde-azul-redes: hsl(186, 100%, 50%);
@@ -39,8 +39,8 @@ body {
     /* ///////////////////////about/////////////// */
     --color-texto-title: hsl(0, 0%, 100%);
     --color-texto-blanco: hsl(0, 0%, 67%);
-    --color-b1: linear-gradient(315deg, #3f0028, #28001977, transparent);
-    --color-b2: linear-gradient(315deg, #283b00, #1b280083, transparent);
+    --color-b1: linear-gradient(315deg, #9b0062, #2b001bd5, transparent);
+    --color-b2: linear-gradient(315deg, #77af00, #263801db, transparent);
 
 }
 
