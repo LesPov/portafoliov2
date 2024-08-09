@@ -9,6 +9,8 @@ export class ReferenciasAnimacionesService {
   // Arreglo para almacenar las suscripciones a eventos, para poder limpiarlas luego
   private mobileSubscriptions: Subscription[] = [];
   private renderer: Renderer2;
+  private dvdAnimationSubscription: Subscription | null = null;
+
 
   constructor(rendererFactory: RendererFactory2) {
     // Inicializa el renderer, que permite manipular elementos del DOM de manera segura
