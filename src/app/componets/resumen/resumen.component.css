@@ -107,14 +107,14 @@
 
 .container {
     display: flex;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    gap: 20px;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    padding: 0px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        gap: 20px;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        align-content: center;
+        padding: 0px;
 }
 
 
@@ -792,7 +792,7 @@ img {
 .container3 {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
     gap: 80px;
     margin-top: 50px;
     margin-bottom: 50px;
@@ -821,8 +821,8 @@ img {
 .card1::before {
     content: '';
     position: absolute;
-    top: var(--y, 0);
-    left: var(--x, 0);
+    top: var(--y, 50%);
+    left: var(--x, 50%);
     transform: translate(-50%, -50%);
     background: radial-gradient(var(--clr), transparent, transparent);
     width: 300px;
@@ -1106,8 +1106,8 @@ img {
 
 /* Teléfonos en orientación vertical y horizontal */
 @media (max-width: 400px) {
-
-    /* 
+   
+/* 
    
 
     .container {

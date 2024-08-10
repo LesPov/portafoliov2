@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { BodyComponent } from './componets/body/body.component';
 import { PerfilComponent } from './componets/perfil/perfil.component';
 import { HeaderComponent } from './componets/header/header.component';
-import { SidenavComponent } from './sidenav/sidenav.component';
+import { SidenavComponent } from './componets/sidenav/sidenav.component';
 
 @Component({
   selector: 'app-root',

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SidenavComponent } from '../../sidenav/sidenav.component';
+import { SidenavComponent } from '../sidenav/sidenav.component';
 
 @Component({
   selector: 'app-body',
   standalone: true,
-  imports: [RouterModule,SidenavComponent],
+  imports: [RouterModule, SidenavComponent],
   templateUrl: './body.component.html',
   styleUrl: './body.component.css'
 })

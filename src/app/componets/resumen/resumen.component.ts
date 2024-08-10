@@ -1,7 +1,5 @@
-
-import { AfterViewInit, Component, ElementRef, OnDestroy, QueryList, Renderer2, ViewChildren } from '@angular/core';
-import { ReferenciasAnimacionesService } from './referencias/referencias-animaciones.service';
-import { HabilidadesAnimacionesService } from './habilidades/habilidades-animaciones.service';
+import { AfterViewInit, Component, ElementRef, OnDestroy, QueryList, ViewChildren } from '@angular/core';
+import { fromEvent, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-resumen',
@@ -10,22 +8,17 @@ import { HabilidadesAnimacionesService } from './habilidades/habilidades-animaci
   styleUrls: ['./resumen.component.css']
 })
 export class ResumenComponent implements AfterViewInit, OnDestroy {
-  // Referencias a los elementos del DOM con las IDs especificadas
   @ViewChildren('wrapper1, wrapper2, wrapper3, wrapper4, wrapper5, wrapper6, wrapper7, wrapper8') wrapperRefs!: QueryList<ElementRef<HTMLDivElement>>;
   @ViewChildren('ticket1, ticket2, ticket3, ticket4, ticket5, ticket6, ticket7, ticket8') ticketRefs!: QueryList<ElementRef<HTMLDivElement>>;
   @ViewChildren('card1') cardRefs!: QueryList<ElementRef<HTMLDivElement>>;
 
-  // Variables para manejar la detección de tamaño de pantalla
   private mobileQuery: MediaQueryList | undefined;
   private mobileListener: (() => void) | undefined;
   private mobileMode = false;
+  private subscriptions: Subscription[] = [];
+  private animationIntervals: any[] = [];
 
-  constructor(
-    private renderer: Renderer2,
-    private referenciasService: ReferenciasAnimacionesService,
-    private habilidadesService: HabilidadesAnimacionesService
-  ) {
-    // Constructor: Configura el media query para detectar el tamaño de la pantalla
+  constructor() {
     if (typeof window !== 'undefined') {
       this.mobileQuery = window.matchMedia('(max-width: 768px)');
       this.mobileListener = () => this.onMediaChange();
@@ -35,72 +28,164 @@ export class ResumenComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     if (typeof window !== 'undefined') {
-      // Recorre los elementos y aplica efectos de hover usando el servicio `ReferenciasAnimacionesService`
-      this.wrapperRefs.forEach((wrapperRef, index) => {
-        const ticketRef = this.ticketRefs.toArray()[index];
-        this.referenciasService.addHoverEffectToWrapper(wrapperRef, ticketRef);
-      });
-
-      // Aplica efectos de hover a las tarjetas usando el servicio `HabilidadesAnimacionesService`
-      this.cardRefs.forEach((cardRef) => {
-        this.habilidadesService.addCardHoverEffect(cardRef);
-      });
-
-      // Inicializa las tarjetas sociales (agrega efectos de animación)
-      this.initializeSocialCards();
-
-      // Verifica el estado inicial del media query y ajusta las animaciones en consecuencia
-      this.onMediaChange();
+      this.initializeHoverEffects(); // Unifica la inicialización de efectos de hover
+      this.initializeSocialCards(); // Inicializa las tarjetas sociales
+      this.onMediaChange(); // Verifica el estado inicial del media query
     }
   }
 
   ngOnDestroy() {
-    // Remueve el listener del media query cuando el componente se destruye
     if (this.mobileQuery && this.mobileListener) {
       this.mobileQuery.removeEventListener('change', this.mobileListener);
     }
-
-    // Limpia las suscripciones a eventos móviles en el servicio `ReferenciasAnimacionesService`
-    this.referenciasService.clearMobileSubscriptions();
-
-    // Detiene las animaciones móviles usando el servicio `HabilidadesAnimacionesService`
-    this.habilidadesService.stopMobileAnimations(this.ticketRefs);
+    this.clearIntervals();
+    this.clearSubscriptions();
   }
 
-  // Método para manejar los cambios en el tamaño de la pantalla
-  private onMediaChange() {
-    if (this.mobileQuery) {
-      this.mobileMode = this.mobileQuery.matches; // Verifica si estamos en modo móvil
-      // Inicia o detiene animaciones basadas en el modo (móvil o no)
-      this.mobileMode ? this.habilidadesService.startMobileAnimations(this.wrapperRefs, this.ticketRefs) : this.habilidadesService.stopMobileAnimations(this.ticketRefs);
-    }
+  // ============================
+  // Sección: Efectos de Hover
+  // ============================
+
+  private initializeHoverEffects() {
+    this.wrapperRefs.forEach((wrapperRef, index) => {
+      const ticketRef = this.ticketRefs.toArray()[index];
+      this.addHoverEffect(wrapperRef.nativeElement, ticketRef.nativeElement);
+    });
+
+    this.cardRefs.forEach((cardRef) => {
+      this.addHoverEffect(cardRef.nativeElement);
+    });
   }
 
-  // Método para manejar la visualización de las tarjetas sociales con animación
-  private showSocial(toggleCardId: string, socialCardId: string) {
-    // Selecciona los elementos del DOM basados en las IDs proporcionadas
-    const toggle = this.renderer.selectRootElement(`#${toggleCardId}`, true);
-    const socialCard = this.renderer.selectRootElement(`#${socialCardId}`, true);
+  private addHoverEffect(element: HTMLDivElement, ticket?: HTMLDivElement) {
+    const mouseMove$ = fromEvent<MouseEvent>(element, 'mousemove').subscribe(event => {
+      if (this.mobileMode) return;
 
-    // Si los elementos existen, agrega un listener para manejar los clics
-    if (toggle && socialCard) {
-      this.renderer.listen(toggle, 'click', () => {
-        const isActive = socialCard.classList.contains('animation');
-        // Alterna la clase de animación en función de su estado actual
-        if (isActive) {
-          this.renderer.removeClass(socialCard, 'animation');
-        } else {
-          this.renderer.addClass(socialCard, 'animation');
-        }
-      });
-    }
+      if (ticket) {
+        const { width, height } = element.getBoundingClientRect();
+        const rotationX = ((event.offsetX - width / 2) / width) * 35;
+        const rotationY = ((event.offsetY - height / 2) / height) * 35;
+
+        ticket.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
+      } else {
+        const rect = element.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        element.style.setProperty('--x', `${x}px`);
+        element.style.setProperty('--y', `${y}px`);
+      }
+    });
+
+    const mouseLeave$ = fromEvent(element, 'mouseleave').subscribe(() => {
+      if (ticket) {
+        ticket.style.transform = 'rotateX(0deg) rotateY(0deg)';
+      } else {
+        element.style.setProperty('--x', `50%`);
+        element.style.setProperty('--y', `50%`);
+      }
+    });
+
+    this.subscriptions.push(mouseMove$, mouseLeave$);
   }
 
-  // Método para inicializar todas las tarjetas sociales con sus respectivos toggles
+  // ==========================
+  // Sección: Tarjetas Sociales
+  // ==========================
+
   private initializeSocialCards() {
-    this.showSocial('card1-toggle1', 'card1-social1');
-    this.showSocial('card1-toggle2', 'card1-social2');
-    this.showSocial('card1-toggle3', 'card1-social3');
-    console.log('Social cards initialized'); // Registro en la consola para confirmar la inicialización
+    ['card1-toggle1', 'card1-toggle2', 'card1-toggle3'].forEach((toggleId, index) => {
+      const socialId = `card1-social${index + 1}`;
+      const toggleElement = document.getElementById(toggleId);
+      const socialElement = document.getElementById(socialId);
+
+      if (toggleElement && socialElement) {
+        this.subscriptions.push(fromEvent(toggleElement, 'click').subscribe(() => this.toggleSocialCard(socialElement)));
+      }
+    });
   }
-} 
+
+  private toggleSocialCard(socialElement: HTMLElement) {
+    if (socialElement.classList.contains('animation')) {
+      socialElement.classList.add('down-animation');
+      setTimeout(() => socialElement.classList.remove('down-animation'), 1000);
+    }
+    socialElement.classList.toggle('animation');
+  }
+
+  // ==========================
+  // Sección: Animaciones Móviles
+  // ==========================
+  private startBouncingAnimation(card: HTMLDivElement) {
+    let x = 50, y = 50;
+    let dx = 1, dy = 1;
+
+    const move = () => {
+      const rect = card.getBoundingClientRect();
+
+      if (x <= 0 || x >= rect.width) dx = -dx;
+      if (y <= 0 || y >= rect.height) dy = -dy;
+
+      x += dx;
+      y += dy;
+
+      card.style.setProperty('--x', `${x}px`);
+      card.style.setProperty('--y', `${y}px`);
+    };
+
+    const intervalId = setInterval(move, 10);
+    this.animationIntervals.push(intervalId);
+  }
+
+  private startMobileAnimations() {
+    this.cardRefs.forEach((cardRef) => this.startBouncingAnimation(cardRef.nativeElement));
+
+    this.wrapperRefs.forEach((wrapperRef, index) => {
+      const ticketRef = this.ticketRefs.toArray()[index];
+      const intervalId = setInterval(() => this.randomMove(ticketRef.nativeElement), 1000);
+      this.animationIntervals.push(intervalId);
+    });
+  }
+
+  private randomMove(ticket: HTMLDivElement) {
+    const rotationX = (Math.random() - 0.5) * 60;
+    const rotationY = (Math.random() - 0.5) * 60;
+    ticket.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
+  }
+
+  private stopMobileAnimations() {
+    this.clearIntervals();
+    this.resetPositions();
+  }
+
+  private resetPositions() {
+    this.cardRefs.forEach(cardRef => {
+      const card = cardRef.nativeElement;
+      card.style.setProperty('--x', `50%`);
+      card.style.setProperty('--y', `50%`);
+    });
+
+    this.ticketRefs.forEach(ticketRef => {
+      ticketRef.nativeElement.style.transform = 'rotateX(0deg) rotateY(0deg)';
+    });
+  }
+
+  private clearSubscriptions() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+    this.subscriptions = [];
+  }
+
+  private clearIntervals() {
+    this.animationIntervals.forEach(intervalId => clearInterval(intervalId));
+    this.animationIntervals = [];
+  }
+
+  private onMediaChange() {
+    this.mobileMode = this.mobileQuery?.matches || false;
+    if (this.mobileMode) {
+      this.startMobileAnimations();
+    } else {
+      this.stopMobileAnimations();
+    }
+  }
+}
