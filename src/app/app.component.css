@@ -65,3 +65,52 @@
     z-index: -2;
 
 }
+.scrollup {
+    position: fixed;
+    right: 1rem;
+    bottom: 70px;
+    opacity: .8;
+    border: 1px solid var(--border-interior);
+    box-shadow: 0px 0px 6px 2px var(--border-shadow-interior);
+    background: var(--color-background-header-sidenav);
+    padding: 0.3rem .3rem;
+    border-radius: .4rem;
+    z-index: 1000;
+    transition: .4s;
+    animation: up-animation 1s ease-in-out forwards;
+}
+
+/* Hover state */
+.scrollup:hover {
+    background-color: var(--color-azul-neon);
+}
+
+/* Nueva clase para el estado desactivado */
+.scrollup--inactive:hover {
+    background-color: var(--color-background-header-sidenav); /* Sin cambio de color */
+    bottom: 70px; /* Sin cambio de posición */
+}
+
+/* Estilo del ícono */
+.scrollup__icon {
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+/* Animación de rebote */
+@keyframes bounce-animation {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Estilo cuando se hace clic */
+.scrollup.clicked {
+    animation: bounce-animation 0.6s ease-in-out;
+}
