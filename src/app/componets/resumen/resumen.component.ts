@@ -11,7 +11,7 @@ export class ResumenComponent implements AfterViewInit, OnDestroy {
   // Referencias a elementos HTML con las clases 'wrapper' y 'ticket'
   @ViewChildren('wrapper1, wrapper2, wrapper3, wrapper4, wrapper5, wrapper6, wrapper7, wrapper8') wrapperRefs!: QueryList<ElementRef<HTMLDivElement>>;
   @ViewChildren('ticket1, ticket2, ticket3, ticket4, ticket5, ticket6, ticket7, ticket8') ticketRefs!: QueryList<ElementRef<HTMLDivElement>>;
-  
+
   // Referencia a elementos HTML con la clase 'card1'
   @ViewChildren('card1') cardRefs!: QueryList<ElementRef<HTMLDivElement>>;
 
@@ -36,6 +36,8 @@ export class ResumenComponent implements AfterViewInit, OnDestroy {
     if (typeof window !== 'undefined') {
       this.initializeHoverEffects(); // Inicializa los efectos de hover
       this.initializeSocialCards(); // Inicializa las tarjetas sociales
+      this.initializeHandAnimation(); // Inicia la animación de la mano
+
       this.onMediaChange(); // Verifica el estado inicial del media query
     }
   }
@@ -201,6 +203,56 @@ export class ResumenComponent implements AfterViewInit, OnDestroy {
     this.clearIntervals(); // Limpia todos los intervalos de animación
     this.resetPositions(); // Resetea las posiciones de los elementos animados
   }
+
+  // ==============================
+  // Sección: Animación del Icono de Mano
+  // ==============================
+
+/**
+ * Inicializa la animación del ícono de la mano, que hace que la mano se mueva hacia arriba y hacia abajo.
+ */
+private initializeHandAnimation() {
+  // Itera a través de cada tarjeta para aplicar la animación
+  this.cardRefs.forEach((cardRef, index) => {
+    const handElement = document.getElementById(`hand${index + 1}`);
+    const clickableSection = document.getElementById(`clickableSection${index + 1}`);
+    const card1 = cardRef.nativeElement;
+
+    if (handElement && clickableSection && card1) {
+      // Maneja la animación al entrar y salir del área clickable
+      const mouseEnter$ = fromEvent(clickableSection, 'mouseenter').subscribe(() => {
+        handElement.classList.remove('hidden');
+        handElement.style.animation = 'click-animation 1.5s infinite ease-in-out';
+      });
+
+      const mouseLeave$ = fromEvent(clickableSection, 'mouseleave').subscribe(() => {
+        handElement.style.animation = 'none';
+      });
+
+      // Maneja el clic en la sección clickable
+      const click$ = fromEvent(clickableSection, 'click').subscribe(() => {
+        handElement.classList.add('hidden'); // Ocultar la mano después de hacer clic
+      });
+
+      // Maneja el clic fuera de la tarjeta card1 para mostrar la mano nuevamente
+      const documentClick$ = fromEvent(document, 'click').subscribe((event: Event) => {
+        if (!card1.contains(event.target as Node)) {
+          // Resetear la animación eliminando y volviendo a agregar la clase
+          handElement.classList.remove('hidden');
+          setTimeout(() => {
+            handElement.style.animation = ''; // Reiniciar la animación
+          }, 2); // Un pequeño retraso para asegurar que se reinicie
+        }
+      });
+
+      this.subscriptions.push(mouseEnter$, mouseLeave$, click$, documentClick$);
+    }
+  });
+}
+
+
+
+
 
   // ==============================
   // Sección: Utilidades y Limpieza
