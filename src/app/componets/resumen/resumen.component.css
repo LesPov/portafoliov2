@@ -107,7 +107,7 @@
 
 .container {
     display: flex;
-    margin-top: 30px;
+    margin-top: px;
     margin-bottom: 25px;
     gap: 20px;
     justify-content: center;
@@ -983,17 +983,17 @@ img {
     z-index: 10;
 }
 
-.card1_social-toggle.b1 {
-    background: #0f0;
+.card1_social-toggle.d1 {
+    background: #0f0 !important;
 
 }
 
-.card1_social-toggle.b2 {
-    background: #ff0055;
+.card1_social-toggle.d2 {
+    background: #ff0055 !important;
 
 }
 
-.card1_social-toggle.b3 {
+.card1_social-toggle.d3 {
     background: #1e00ff;
 
 }

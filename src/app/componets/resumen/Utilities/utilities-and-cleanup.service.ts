@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
-
 @Injectable({
   providedIn: 'root'
 })
-export class ReferenciasAnimacionesService {
+export class UtilitiesAndCleanupService {
 
+  constructor() { }
 }
