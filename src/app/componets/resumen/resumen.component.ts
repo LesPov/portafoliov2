@@ -34,13 +34,11 @@ export class ResumenComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     // Se ejecuta una vez que la vista ha sido inicializada
     if (typeof window !== 'undefined') {
-      this.initializeHoverEffects(); // Inicializa los efectos de hover
-      this.initializeSocialCards(); // Inicializa las tarjetas sociales
-      this.initializeHandAnimation(); // Inicia la animación de la mano
-      this.initializeSocialCards(); // Inicializa las tarjetas sociales
-      this.initializeSocialHoverEffects(); // Inicializa el efecto de hover en las tarjetas sociales
-
-      this.onMediaChange(); // Verifica el estado inicial del media query
+      this.initializeTicketHoverEffects();
+      this.initializeSocialCardHoverEffects();
+      this.initializeSocialCards();
+      this.initializeHandAnimation();
+      this.onMediaChange();
     }
   }
 
@@ -54,70 +52,82 @@ export class ResumenComponent implements AfterViewInit, OnDestroy {
   }
 
   // ============================
-  // Sección: Efectos de Hover
+  // Sección: Efectos de Hover sus tickets asociados.
   // ============================
 
 
-/**
- * Inicializa los efectos de hover para los elementos 'wrapper'.
- */
-private initializeHoverEffects() {
-  this.wrapperRefs.forEach((wrapperRef, index) => {
-    const ticketRef = this.ticketRefs.toArray()[index]; // Obtiene la referencia correspondiente al ticket
-    this.addHoverEffect(wrapperRef.nativeElement, ticketRef.nativeElement); // Añade el efecto de hover al wrapper y su ticket asociado
-  });
+  /**
+   * Inicializa los efectos de hover para los wrappers y sus tickets asociados.
+   */
+  private initializeTicketHoverEffects() {
+    this.wrapperRefs.forEach((wrapperRef, index) => {
+      const ticketRef = this.ticketRefs.toArray()[index];
+      this.addTicketHoverEffect(wrapperRef.nativeElement, ticketRef.nativeElement);
+    });
+  }
 
-}
-
-/**
- * Inicializa los efectos de hover para las tarjetas sociales.
- */
-private initializeSocialHoverEffects() {
-  this.cardRefs.forEach((cardRef) => {
-    this.addHoverEffect(cardRef.nativeElement); // Añade el efecto de hover a las tarjetas sociales
-  });
-}
 
   /**
-   * Añade un efecto de hover a un elemento HTML.
-   * @param element El elemento HTML al que se añadirá el efecto de hover.
-   * @param ticket (Opcional) Un elemento HTML secundario que rotará en función de la posición del mouse.
+   * Añade un efecto de hover a un wrapper y su ticket asociado.
+   * @param wrapper El elemento HTML del wrapper.
+   * @param ticket El elemento HTML del ticket que rotará en función de la posición del mouse.
    */
-  private addHoverEffect(element: HTMLDivElement, ticket?: HTMLDivElement) {
-    const mouseMove$ = fromEvent<MouseEvent>(element, 'mousemove').subscribe(event => {
-      if (this.mobileMode) return; // No aplica el efecto en modo móvil
+  private addTicketHoverEffect(wrapper: HTMLDivElement, ticket: HTMLDivElement) {
+    const mouseMove$ = fromEvent<MouseEvent>(wrapper, 'mousemove').subscribe(event => {
+      if (this.mobileMode) return;
 
-      if (ticket) {
-        // Rotación 3D de los tickets en función de la posición del mouse
-        const { width, height } = element.getBoundingClientRect();
-        const rotationX = ((event.offsetX - width / 2) / width) * 35;
-        const rotationY = ((event.offsetY - height / 2) / height) * 35;
+      const { width, height } = wrapper.getBoundingClientRect();
+      const rotationX = ((event.offsetX - width / 2) / width) * 35;
+      const rotationY = ((event.offsetY - height / 2) / height) * 35;
 
-        ticket.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
-      } else {
-        // Movimiento del gradiente de fondo en las tarjetas sociales
-        const rect = element.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-
-        element.style.setProperty('--x', `${x}px`);
-        element.style.setProperty('--y', `${y}px`);
-      }
+      ticket.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
     });
 
-    const mouseLeave$ = fromEvent(element, 'mouseleave').subscribe(() => {
-      if (ticket) {
-        // Reseteo de la rotación al salir el mouse
-        ticket.style.transform = 'rotateX(0deg) rotateY(0deg)';
-      } else {
-        // Reseteo de la posición del gradiente al centro
-        element.style.setProperty('--x', `50%`);
-        element.style.setProperty('--y', `50%`);
-      }
+    const mouseLeave$ = fromEvent(wrapper, 'mouseleave').subscribe(() => {
+      ticket.style.transform = 'rotateX(0deg) rotateY(0deg)';
     });
 
-    this.subscriptions.push(mouseMove$, mouseLeave$); // Almacena las suscripciones para su posterior cancelación
+    this.subscriptions.push(mouseMove$, mouseLeave$);
   }
+
+
+
+  // ============================
+  // Sección: Efectos de Hover para las tarjetas sociales.
+  // ============================
+
+  /**
+   * Inicializa los efectos de hover para las tarjetas sociales.
+   */
+  private initializeSocialCardHoverEffects() {
+    this.cardRefs.forEach(cardRef => {
+      this.addSocialCardHoverEffect(cardRef.nativeElement);
+    });
+  }
+  /**
+   * Añade un efecto de hover a una tarjeta social.
+   * @param card El elemento HTML de la tarjeta social.
+   */
+  private addSocialCardHoverEffect(card: HTMLDivElement) {
+    const mouseMove$ = fromEvent<MouseEvent>(card, 'mousemove').subscribe(event => {
+      if (this.mobileMode) return;
+
+      const rect = card.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
+      card.style.setProperty('--x', `${x}px`);
+      card.style.setProperty('--y', `${y}px`);
+    });
+
+    const mouseLeave$ = fromEvent(card, 'mouseleave').subscribe(() => {
+      card.style.setProperty('--x', '50%');
+      card.style.setProperty('--y', '50%');
+    });
+
+    this.subscriptions.push(mouseMove$, mouseLeave$);
+  }
+
 
   // ==========================
   // Sección: Tarjetas Sociales
