@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { HoverEffectsService } from './hover-effects.service';
+import { TicketHoverService } from './ticket-hover.service';
 
-describe('HoverEffectsService', () => {
-  let service: HoverEffectsService;
+describe('TicketHoverService', () => {
+  let service: TicketHoverService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(HoverEffectsService);
+    service = TestBed.inject(TicketHoverService);
   });
 
   it('should be created', () => {
