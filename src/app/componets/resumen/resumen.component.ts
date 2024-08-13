@@ -37,6 +37,8 @@ export class ResumenComponent implements AfterViewInit, OnDestroy {
       this.initializeHoverEffects(); // Inicializa los efectos de hover
       this.initializeSocialCards(); // Inicializa las tarjetas sociales
       this.initializeHandAnimation(); // Inicia la animación de la mano
+      this.initializeSocialCards(); // Inicializa las tarjetas sociales
+      this.initializeSocialHoverEffects(); // Inicializa el efecto de hover en las tarjetas sociales
 
       this.onMediaChange(); // Verifica el estado inicial del media query
     }
@@ -55,19 +57,26 @@ export class ResumenComponent implements AfterViewInit, OnDestroy {
   // Sección: Efectos de Hover
   // ============================
 
-  /**
-   * Inicializa los efectos de hover para los elementos 'wrapper' y 'card1'.
-   */
-  private initializeHoverEffects() {
-    this.wrapperRefs.forEach((wrapperRef, index) => {
-      const ticketRef = this.ticketRefs.toArray()[index]; // Obtiene la referencia correspondiente al ticket
-      this.addHoverEffect(wrapperRef.nativeElement, ticketRef.nativeElement); // Añade el efecto de hover al wrapper y su ticket asociado
-    });
 
-    this.cardRefs.forEach((cardRef) => {
-      this.addHoverEffect(cardRef.nativeElement); // Añade el efecto de hover a las tarjetas sociales
-    });
-  }
+/**
+ * Inicializa los efectos de hover para los elementos 'wrapper'.
+ */
+private initializeHoverEffects() {
+  this.wrapperRefs.forEach((wrapperRef, index) => {
+    const ticketRef = this.ticketRefs.toArray()[index]; // Obtiene la referencia correspondiente al ticket
+    this.addHoverEffect(wrapperRef.nativeElement, ticketRef.nativeElement); // Añade el efecto de hover al wrapper y su ticket asociado
+  });
+
+}
+
+/**
+ * Inicializa los efectos de hover para las tarjetas sociales.
+ */
+private initializeSocialHoverEffects() {
+  this.cardRefs.forEach((cardRef) => {
+    this.addHoverEffect(cardRef.nativeElement); // Añade el efecto de hover a las tarjetas sociales
+  });
+}
 
   /**
    * Añade un efecto de hover a un elemento HTML.
