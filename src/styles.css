@@ -34,6 +34,7 @@ body {
     --backgraund-hover-blanco-text-cards-social: hsl(0, 0%, 100%);
     --sombra-cards-personales-hover: hsl(186, 100%, 50%);
     --color-naranga-neon: hsl(25, 100%, 50%);
+    --color-botton-contacto: hsla(25, 100%, 50%, 0.332);
 
 
     /* ///////////////////////about/////////////// */

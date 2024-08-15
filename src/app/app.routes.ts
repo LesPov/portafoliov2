@@ -4,6 +4,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 export const routes: Routes = [
     { path: 'sobremi', loadComponent: () => import('./componets/sobremi/sobremi.component').then(m => m.SobremiComponent) },
     { path: 'resumen', loadComponent: () => import('./componets/resumen/resumen.component').then(m => m.ResumenComponent) },
+    { path: 'proyecto', loadComponent: () => import('./componets/proyect/proyect.component').then(m => m.ProyectComponent) },
+    { path: 'contacto', loadComponent: () => import('./componets/contact/contact.component').then(m => m.ContactComponent) },
     { path: '', redirectTo: '/sobremi', pathMatch: 'full' },
     { path: '**', redirectTo: '/sobremi' }
 ];

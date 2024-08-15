@@ -10,7 +10,7 @@ export const navbarData = [
         label: 'Resumen'
     },
     {
-        routerLink: 'proyect',
+        routerLink: 'proyecto',
         icon: 'bx bxl-spring-boot',
         label: 'Proyectos'
     },
@@ -20,7 +20,7 @@ export const navbarData = [
         label: 'Blogs'
     },
     {
-        routerLink: 'contact',
+        routerLink: 'contacto',
         icon: 'bx bxs-contact',
         label: 'Contactame'
     }

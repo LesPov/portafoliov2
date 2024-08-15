@@ -1,8 +1,8 @@
 .body {
     width: 95%;
-    min-height: 96vh;
+    min-height: 60vh;
     margin: 10px;
-    margin-bottom: 240px;
+    margin-bottom: 250px;
     z-index: 100;
     position: relative;
     top: 124px;
@@ -14,5 +14,3 @@
     box-shadow: inset 0px 0px 6px 2px var(--border-shadow-interior);
 
 }
-
-
