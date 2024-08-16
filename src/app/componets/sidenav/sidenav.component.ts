@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { navbarData } from './nav-data';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-sidenav',
@@ -10,6 +11,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule, RouterModule,],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.css'
+  
 })
 export class SidenavComponent implements OnInit {
   private darkTheme = 'dark-theme';
@@ -18,9 +20,9 @@ export class SidenavComponent implements OnInit {
   navMenu: HTMLElement | null = null;
   navToggle: HTMLElement | null = null;
   navClose: HTMLElement | null = null;
-  // constructor(private toastr: ToastrService) {
+  constructor(private toastr: ToastrService) {
 
-  // }
+  }
   ngOnInit(): void {
     const selectedTheme = this.isWindowAvailable() ? localStorage.getItem('selected-theme') : null;
     const selectedIcon = this.isWindowAvailable() ? localStorage.getItem('selected-icon') : null;
@@ -44,9 +46,9 @@ export class SidenavComponent implements OnInit {
 
     }
   }
-  // showsuccess(): void {
-  //   this.toastr.warning('En proximas actualizaciones se agregara.', 'Warning');
-  // }
+  showsuccess(): void {
+    this.toastr.warning('En proximas actualizaciones se agregara.', 'Warning');
+  }
   isWindowAvailable(): boolean {
     return typeof window !== 'undefined';
   }

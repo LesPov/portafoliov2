@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {  Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -6,7 +6,8 @@ import { ToastrService } from 'ngx-toastr';
   standalone: true,
   imports: [],
   templateUrl: './proyect.component.html',
-  styleUrl: './proyect.component.css'
+  styleUrl: './proyect.component.css',
+
 })
 export class ProyectComponent {
 
