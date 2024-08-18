@@ -145,11 +145,17 @@
         transform: translate(1129px, 35px);
 
     }
-}
 
-.ball_3 {
+    .ball_3 {
 
-    transform: translate(1212px, 345px);
+        transform: translate(1212px, 345px);
 
 
+    }
+
+    .scrollup {
+
+        bottom: 12px;
+
+    }
 }
