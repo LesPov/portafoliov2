@@ -65,6 +65,7 @@
     z-index: -2;
 
 }
+
 .scrollup {
     position: fixed;
     right: 1rem;
@@ -87,8 +88,10 @@
 
 /* Nueva clase para el estado desactivado */
 .scrollup--inactive:hover {
-    background-color: var(--color-background-header-sidenav); /* Sin cambio de color */
-    bottom: 70px; /* Sin cambio de posición */
+    background-color: var(--color-background-header-sidenav);
+    /* Sin cambio de color */
+    bottom: 70px;
+    /* Sin cambio de posición */
 }
 
 /* Estilo del ícono */
@@ -102,9 +105,11 @@
     0% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(-10px);
     }
+
     100% {
         transform: translateY(0);
     }
@@ -113,4 +118,38 @@
 /* Estilo cuando se hace clic */
 .scrollup.clicked {
     animation: bounce-animation 0.6s ease-in-out;
+}
+
+@media screen and (min-width:1366px) {
+
+    .overlay::before {
+        height: 300px;
+        width: 300px;
+        transform: translate(303px, -146px);
+    }
+
+    .ball_1 {
+        height: 150px;
+        width: 150px;
+        transform: translate(850px, 176px);
+    }
+
+    .overlay::after {
+        transform: translate(174px, 352px);
+
+    }
+
+    .ball_2 {
+        height: 190px;
+        width: 190px;
+        transform: translate(1129px, 35px);
+
+    }
+}
+
+.ball_3 {
+
+    transform: translate(1212px, 345px);
+
+
 }
