@@ -289,6 +289,7 @@
 
     .nav_btns {
         display: flex;
+        z-index: 1000;
         align-items: center;
     }
 

@@ -6,7 +6,7 @@
     z-index: 100;
     position: relative;
     top: 124px;
-    backdrop-filter: blur(25px);
+    backdrop-filter: blur(15px);
     border: 1px solid var(--border-interior);
     transition: all .5s ease;
     background: var(--color-background-container);
@@ -23,7 +23,7 @@
         margin-bottom: 1rem;
         z-index: 100;
         top: 0;
-    
+
     }
 
 }

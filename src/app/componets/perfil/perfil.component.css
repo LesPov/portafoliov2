@@ -5,7 +5,7 @@
 
 .container {
     background: var(--color-background-container);
-    backdrop-filter: blur(25px);
+    backdrop-filter: blur(15px);
     border: 1px solid var(--border-interior);
     margin: 10px;
     position: relative;
@@ -64,12 +64,6 @@ h1 {
 }
 
 
-.perfil .text-animate2 {
-
-    position: relative;
-    display: flex;
-    justify-content: center;
-}
 
 
 
@@ -107,8 +101,8 @@ h1 {
     transform: scale(1.1);
     background: var(--backgraund-hover-negro-cards-social);
     color: var(--color-cards-personales);
-    border: 2px solid var(--sombra-cards-personales);
-    box-shadow: none;
+    border: 1px solid var(--sombra-cards-personales);
+    box-shadow: inset 0px 0px 2px 2px var(--sombra-cards-personales-hover);
 
 }
 
@@ -158,43 +152,6 @@ h1 {
     text-decoration: none;
 }
 
-/* Teléfonos en orientación vertical y horizontal */
-/* @media (max-width: 400px) {
-    .container {
-        margin: 10px;
-        position: relative;
-        left: 0;
-        display: flex;
-        width: 95%;
-        height: 82vh;
-
-    }
-
-    h1 {
-        margin-top: 25px;
-        font-size: 26px;
-
-    }
-
-    .imagen img {
-        width: 270px;
-        height: 330px;
-        transform: rotate(357deg) translateY(-10px);
-
-    }
-
-    .imagen {
-        margin-top: 15px;
-        margin-bottom: 15px;
-
-    }
-
-    .buttons {
-        padding: 18px;
-        margin: 25px 0 15px 0;
-
-    } 
-}*/
 
 @media screen and (min-width:1366px) {
 
@@ -202,10 +159,67 @@ h1 {
         margin: 10px;
         position: fixed;
         z-index: 5;
-        top: 0; 
+        top: 0;
         left: 10px;
         width: 20rem;
         height: 96vh;
-    
+        padding: 10px;
     }
+
+
+    .imagen {
+        width: 260px;
+        height: 290px;
+        overflow: hidden;
+
+    }
+
+
+    .imagen img {
+        width: 285px;
+        height: 300px;
+        margin-left: -30px;
+        transform: rotate(357deg);
+        margin-top: -14px;
+
+
+    }
+
+   
+
+
+    h1 {
+
+        margin-bottom: 5px;
+        color: var(--color-white-text);
+    }
+
+    .cardperson i {
+        font-size: 20px;
+        transition: .3s;
+
+    }
+
+
+
+
+    .info_person p {
+        font-size: 13px;
+        font-weight: 400;
+
+    }
+
+    .buttons {
+        padding: 10px;
+        margin: 15px 0 15px 0;
+
+        transition: 0.5s ease;
+    }
+
+ 
+    .buttons .button_flex {
+        color: var(--color-white-text);
+        text-decoration: none;
+    }
+
 }
