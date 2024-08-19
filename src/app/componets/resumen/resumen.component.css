@@ -126,6 +126,7 @@
 
     font-size: 22px;
 }
+
 .b1 {
     position: relative;
     background: var(--color-b1);
@@ -177,7 +178,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
     gap: 50px;
-    
+
 }
 
 .container .box_container .box {
@@ -1172,35 +1173,85 @@ img {
 
 
 /* Teléfonos en orientación vertical y horizontal */
-@media (max-width: 400px) {
+@media screen and (min-width:1366px) {
+    .section {
 
-    /* 
-   
+        padding: 2rem 3rem 0rem 3rem;
+
+    }
 
     .container {
+        padding: 10px;
         display: flex;
-        margin-top: 50px;
-        margin-bottom: 50px;
-        gap: 20px;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-        align-content: center;
-        padding: 0px;
+        margin-top: 15px;
+        margin-bottom: 30px;
+        gap: 25px;
+        flex-direction: row;
+        align-items: flex-start;
+    }
 
-    } 
+    .container .box_container {
+        gap: 35px;
+    }
+
     .box_contain {
         display: grid;
-        grid-template-rows: repeat(8, 1fr);
-        grid-template-columns: repeat(1, 1fr);
-        align-items: center;
-        justify-content: center;
-        align-content: center;
-    }
-    .container3 {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
         grid-template-rows: repeat(3, 1fr);
-        
-    } */
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 45px;
+        row-gap: 90px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+
+    .container3 {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        row-gap: 80px;
+        column-gap: 50px;
+
+    }
+
+    .cards1 {
+
+        height: 240px;
+
+    }
+
+    .card1 {
+
+        height: 240px;
+
+    }
+
+    .card1_img {
+        width: 90px;
+        height: 90px;
+    }
+
+    .card1_border {
+        top: 18px;
+        width: 105px;
+        height: 105px;
+
+        margin: 0 auto 0.75rem;
+    }
+
+
+    .card1_name {
+        top: 170px;
+        font-size: 16px;
+        font-weight: 600;
+
+    }
+
+    .card1_profession {
+        top: 190px;
+    }
+
+    .click {
+        display: none;
+
+    }
 }
