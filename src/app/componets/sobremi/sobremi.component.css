@@ -478,56 +478,15 @@ input:checked+label .description {
         margin: 0 10px;
         display: flex;
         align-items: flex-end;
-        transition: .9s cubic-bezier(.28, -0.03, 0, .99);
+        transition: 1.1s cubic-bezier(.28, -0.03, 0, .99);
     }
 
-    .card>.row {
-        color: white;
-        display: flex;
-        flex-wrap: nowrap;
-        height: 300px;
-
-    }
-
-    .card>.row>.icon img {
-        display: flex;
-        justify-content: center;
-        width: 60px;
-        background-color: rgb(255, 255, 255);
-        border-radius: 50%;
-        align-items: center;
-        margin: 11px 8px 230px 10px;
-    }
-
-    .card>.row>.description {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        overflow: hidden;
-        height: 290px;
-        width: 300px;
-        opacity: 0;
-        transform: translateY(30px);
-        transition-delay: .3s;
-        transition: all .3s ease;
-        position: relative;
-        top: 26px;
-        color: #ffffff;
-
-    }
 
 
 
     .description.c1 p {
         top: 10px;
-        color: transparent;
-        margin-top: 34px !important;
-        text-align: center;
-        position: relative;
-        font-weight: 800;
         left: -20px;
-        font-size: 20px;
     }
 
     .description.c1 p:hover {
@@ -536,61 +495,33 @@ input:checked+label .description {
 
     .description.c2 p {
         top: 10px;
-        color: transparent;
-        margin-top: 34px !important;
-        text-align: center;
-        position: relative;
-        font-weight: 800;
+
         left: -20px;
         font-size: 20px;
     }
 
-    .description.c2 p:hover {
-        color: #ffffff;
-    }
 
     .description.c3 p {
         top: 10px;
-        color: transparent;
-        margin-top: 34px !important;
-        text-align: center;
-        position: relative;
-        font-weight: 800;
+
         left: -20px;
         font-size: 20px;
     }
 
-    .description.c3 p:hover {
-        color: #ffffff;
-    }
 
     .description.c4 p {
         top: 10px;
-        color: transparent;
-        margin-top: 34px !important;
-        text-align: center;
-        position: relative;
-        font-weight: 800;
+
         left: -20px;
         font-size: 20px;
     }
 
-    .description.c4 p:hover {
-        color: #ffffff;
-    }
 
-    input {
-        display: none;
-    }
 
     input:checked+label {
         width: 400px;
     }
 
-    input:checked+label .description {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-    }
 
 
 

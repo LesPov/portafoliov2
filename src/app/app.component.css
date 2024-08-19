@@ -155,7 +155,11 @@
 
     .scrollup {
 
-        bottom: 12px;
+        bottom: 15px;
 
+    }
+
+    .scrollup:hover {
+        bottom: 20px;
     }
 }
