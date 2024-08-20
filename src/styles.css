@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap') ;
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
 * {
     margin: 0;
@@ -10,6 +10,7 @@
 
 body {
     background: #000;
+    cursor: url('/assets/img/rosa-de-los-vientos.png') 16 16, auto;
 }
 
 :root {
@@ -19,13 +20,13 @@ body {
     --color-azul-neon: hsl(186, 100%, 50%);
     --color-borde-azul-redes: hsl(186, 100%, 50%);
     --border-shadow-interior: hsl(204deg 100% 18%);
-    
+
     --border-interior: hsl(186deg 100% 38% / 89%);
     --color-white-text: #fff;
     --color-black-text: #000;
     --color-gray: #737270;
     --color-grisclaro-text: #ccc;
-    --border-shadow-interior-img:  hsl(186, 100%, 50%);
+    --border-shadow-interior-img: hsl(186, 100%, 50%);
     --backgraund-hover-negro-cards-social: hsl(0, 100%, 0%);
     --backgraund-cards-personales: #00000000;
     --sombra-cards-personales: hsl(186, 100%, 50%);

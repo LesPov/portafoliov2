@@ -34,7 +34,7 @@ h2 {
 
 .titulo {
     display: flex;
-    gap: 190px;
+    gap: 170px;
     align-items: center;
     justify-content: center;
 }
